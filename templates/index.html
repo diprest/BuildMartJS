@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>E-commerce Website Design</title>
+
+  <meta name="description" content="This e-commerce platform offers a user-friendly interface for purchasing building materials, featuring a product catalog, detailed product pages, and a streamlined shopping cart for efficient checkout.">
+  <meta property="og:title" content="E-commerce Website Design">
+  <meta property="og:description" content="This e-commerce platform offers a user-friendly interface for purchasing building materials, featuring a product catalog, detailed product pages, and a streamlined shopping cart for efficient checkout.">
+  <meta property="og:type" content="website">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../static/css/styles.css">
+</head>
+<body>
+
+  <div class="min-h-screen flex flex-col">
+
+    <header class="sticky top-0 z-50 bg-white border-b border-gray-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16 md:h-20 gap-4">
+
+          <a class="flex items-center gap-2 flex-shrink-0" href="index.html">
+            <div class="w-10 h-10 bg-orange-600 rounded-lg flex items-center justify-center">
+              <span class="text-white font-bold text-xl">BM</span>
+            </div>
+            <span class="hidden lg:block text-xl font-bold text-gray-900">BuildMart</span>
+          </a>
+
+          <nav class="hidden md:flex items-center gap-6 lg:gap-8">
+            <a class="text-gray-700 hover:text-orange-600 transition" href="index.html">Products</a>
+            <a href="#" class="text-gray-700 hover:text-orange-600 transition">Categories</a>
+            <a href="#" class="text-gray-700 hover:text-orange-600 transition">Deals</a>
+            <a href="#" class="text-gray-700 hover:text-orange-600 transition">About</a>
+          </nav>
+
+          <div class="hidden md:flex items-center flex-1 max-w-md">
+            <div class="relative w-full">
+              <img src="../static/icons/search.svg" alt="" class="icon icon-5 absolute left-3 top-1/2 -translate-y-1/2 opacity-50">
+              <input id="search-input" type="text" placeholder="Search products..."
+                     class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent">
+            </div>
+          </div>
+
+          <div class="flex items-center gap-3 flex-shrink-0">
+            <button onclick="toggleMobileSearch()" class="md:hidden p-2 text-gray-600 hover:text-orange-600 transition">
+              <img src="../static/icons/search.svg" alt="" class="icon icon-5">
+            </button>
+
+            <a class="relative p-2 text-gray-600 hover:text-orange-600 transition" href="cart.html">
+              <img src="../static/icons/cart.svg" alt="" class="icon icon-5">
+              <span class="cart-badge absolute -top-1 -right-1 bg-orange-600 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center" style="display:none;">0</span>
+            </a>
+
+            <button onclick="toggleMobileMenu()" class="md:hidden p-2 text-gray-600">
+              <img src="../static/icons/menu.svg" alt="" class="icon icon-5">
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div id="mobile-menu" class="mobile-menu">
+        <a href="index.html">Products</a>
+        <a href="#">Categories</a>
+        <a href="#">Deals</a>
+        <a href="#">About</a>
+      </div>
+
+      <div id="mobile-search-panel" class="mobile-search">
+        <div class="relative w-full">
+          <img src="../static/icons/search.svg" alt="" class="icon icon-5 absolute left-3 top-1/2 -translate-y-1/2 opacity-50">
+          <input id="mobile-search-input" type="text" placeholder="Search products..."
+                 class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent">
+        </div>
+      </div>
+    </header>
+
+    <main class="flex-1">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <div class="mb-8">
+          <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">Building Materials</h1>
+          <p class="text-gray-600">Premium construction supplies for all your projects</p>
+        </div>
+
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
+          <div class="flex items-center gap-2">
+            <button id="filter-toggle-btn" onclick="toggleFilters()"
+                    class="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">
+              <img src="../static/icons/sliders.svg" alt="" class="icon icon-4">
+              Show Filters
+            </button>
+            <p id="product-count" class="text-gray-600">Showing 6 products</p>
+          </div>
+          <div class="relative">
+            <label class="text-sm text-gray-600 mr-2">Sort by:</label>
+            <select id="sort-select"
+                    class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 cursor-pointer">
+              <option value="name-asc">Name (A-Z)</option>
+              <option value="price-asc">Price (Low to High)</option>
+              <option value="price-desc">Price (High to Low)</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="filter-panel" class="filter-panel">
+          <div class="bg-white border border-gray-200 rounded-lg p-6 mb-6">
+            <div class="flex flex-col md:flex-row gap-8">
+
+              <div class="flex-1">
+                <h3 class="font-semibold mb-3">Minimum Rating</h3>
+                <div class="flex flex-wrap gap-4">
+                  <div class="flex items-center space-x-2">
+                    <input type="checkbox" id="rating-5" value="5" class="filter-checkbox filter-rating">
+                    <label class="flex items-center gap-2 text-sm font-medium cursor-pointer select-none" for="rating-5">5+ Stars</label>
+                  </div>
+                  <div class="flex items-center space-x-2">
+                    <input type="checkbox" id="rating-4" value="4" class="filter-checkbox filter-rating">
+                    <label class="flex items-center gap-2 text-sm font-medium cursor-pointer select-none" for="rating-4">4+ Stars</label>
+                  </div>
+                  <div class="flex items-center space-x-2">
+                    <input type="checkbox" id="rating-3" value="3" class="filter-checkbox filter-rating">
+                    <label class="flex items-center gap-2 text-sm font-medium cursor-pointer select-none" for="rating-3">3+ Stars</label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="flex-1">
+                <h3 class="font-semibold mb-3">Price Range</h3>
+                <div class="price-slider-container">
+                  <div class="price-slider-track">
+                    <div id="price-track-fill" class="price-slider-track-fill"></div>
+                  </div>
+                  <input type="range" id="price-min" min="0" max="350" value="0" step="1">
+                  <input type="range" id="price-max" min="0" max="350" value="350" step="1">
+                </div>
+                <div class="flex justify-between text-sm text-gray-600">
+                  <span id="price-min-label">$0.00</span>
+                  <span id="price-max-label">$350.00</span>
+                </div>
+              </div>
+
+              <div class="flex items-end">
+                <button onclick="clearAllFilters()"
+                        class="px-6 py-2 text-sm text-orange-600 hover:text-orange-700 font-medium border border-orange-600 rounded-lg hover:bg-orange-50 transition">
+                  Clear All Filters
+                </button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        </div>
+
+      </div>
+    </main>
+
+    <footer class="bg-gray-900 text-gray-300 mt-auto">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+
+          <div>
+            <h3 class="text-white font-bold text-lg mb-4">BuildMart</h3>
+            <p class="text-sm mb-4">Your trusted source for premium building materials and construction supplies since 1995.</p>
+            <div class="flex gap-3">
+              <a href="#" class="social-link hover:text-orange-500 transition"><img src="../static/icons/facebook.svg" alt="" class="icon icon-5"></a>
+              <a href="#" class="social-link hover:text-orange-500 transition"><img src="../static/icons/twitter.svg" alt="" class="icon icon-5"></a>
+              <a href="#" class="social-link hover:text-orange-500 transition"><img src="../static/icons/instagram.svg" alt="" class="icon icon-5"></a>
+              <a href="#" class="social-link hover:text-orange-500 transition"><img src="../static/icons/linkedin.svg" alt="" class="icon icon-5"></a>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="text-white font-bold text-lg mb-4">Quick Links</h3>
+            <ul class="space-y-2">
+              <li><a href="#" class="hover:text-orange-500 transition text-sm">About Us</a></li>
+              <li><a href="#" class="hover:text-orange-500 transition text-sm">Products</a></li>
+              <li><a href="#" class="hover:text-orange-500 transition text-sm">Delivery Info</a></li>
+              <li><a href="#" class="hover:text-orange-500 transition text-sm">Returns Policy</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="text-white font-bold text-lg mb-4">Customer Service</h3>
+            <ul class="space-y-2">
+              <li><a href="#" class="hover:text-orange-500 transition text-sm">Contact Us</a></li>
+              <li><a href="#" class="hover:text-orange-500 transition text-sm">FAQs</a></li>
+              <li><a href="#" class="hover:text-orange-500 transition text-sm">Shipping &amp; Tracking</a></li>
+              <li><a href="#" class="hover:text-orange-500 transition text-sm">Privacy Policy</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="text-white font-bold text-lg mb-4">Newsletter</h3>
+            <p class="text-sm mb-4">Subscribe for updates and exclusive deals.</p>
+            <div class="flex gap-2">
+              <input type="email" placeholder="Your email"
+                     class="flex-1 px-3 py-2 rounded-lg bg-gray-800 border border-gray-700 text-sm text-gray-200 focus:outline-none focus:border-orange-500">
+              <button class="px-4 py-2 bg-orange-600 hover:bg-orange-700 text-white rounded-lg transition">
+                <img src="../static/icons/mail.svg" alt="" class="icon icon-4">
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="border-t border-gray-800 pt-8 mb-8">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+            <div>
+              <p class="font-semibold text-white mb-1">Phone</p>
+              <p>1-800-BUILD-MART</p>
+            </div>
+            <div>
+              <p class="font-semibold text-white mb-1">Email</p>
+              <p>support@buildmart.com</p>
+            </div>
+            <div>
+              <p class="font-semibold text-white mb-1">Address</p>
+              <p>123 Construction Ave, Builder City, BC 12345</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="border-t border-gray-800 pt-8 text-sm text-center">
+          <p>&copy; 2026 BuildMart. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src="../static/js/main.js" type="module"></script>
+</body>
+</html>
