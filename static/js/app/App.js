@@ -1,4 +1,5 @@
 import { HomePage } from '../pages/HomePage.js';
+import { ProductPage } from '../pages/ProductPage.js';
 import { ProductService, CartService } from '../services/StorageService.js';
 import { updateHeaderBadge } from '../components/Header.js';
 import { showToast } from '../core/helpers.js';
@@ -12,6 +13,11 @@ export class App {
     if (this.page === 'catalog') {
       const homePage = new HomePage();
       homePage.init();
+    }
+
+    if (this.page === 'product') {
+      const productPage = new ProductPage();
+      productPage.init();
     }
 
     this.wireGlobalFunctions();
