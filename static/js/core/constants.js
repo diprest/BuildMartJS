@@ -1,6 +1,6 @@
-import { PRODUCTS } from '../data/products.js';
+import { PRODUCTS } from "../data/products.js";
 
-export const ICONS_PATH = "../../static/icons/";
+export const ICONS_PATH = "../static/icons/";
 export const TAX_RATE = 0.08;
 export const PRICE_MIN = 0;
 export const PRICE_MAX = Math.ceil(Math.max(...PRODUCTS.map((p) => p.price)));
