@@ -55,20 +55,20 @@ export function showToast(message, variant) {
   setTimeout(() => toast.classList.remove("show"), 2500);
 }
 
-export function renderStars(rating) {
+export function renderStars(rating, sizeClass = "icon-4") {
   let html = '<div class="star-rating">';
   const fullStars = Math.floor(rating);
   const hasHalf = rating % 1 >= 0.5;
   const emptyStars = 5 - fullStars - (hasHalf ? 1 : 0);
 
   for (let i = 0; i < fullStars; i++) {
-    html += icon("star-full", "icon-4");
+    html += icon("star-full", sizeClass);
   }
   if (hasHalf) {
-    html += icon("star-half", "icon-4");
+    html += icon("star-half", sizeClass);
   }
   for (let i = 0; i < emptyStars; i++) {
-    html += icon("star-empty", "icon-4");
+    html += icon("star-empty", sizeClass);
   }
   html += `<span class="ml-2 text-sm text-gray-600">(${rating.toFixed(1)})</span></div>`;
   return html;

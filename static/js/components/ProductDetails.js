@@ -1,17 +1,21 @@
 import { formatPrice, icon, renderStars } from '../core/helpers.js';
 import { ICONS_PATH } from '../core/constants.js';
 
-export function buildProductDetailHTML(product, inCart) {
+export function buildProductDetailHTML(product) {
   const thumbs = product.images.map((img, i) => `
     <button type="button" class="product-gallery-thumb aspect-square rounded-lg overflow-hidden border-2 transition ${i === 0 ? 'border-orange-600' : 'border-gray-200 hover:border-gray-300'}" data-index="${i}">
       <img src="${img}" alt="" class="w-full h-full object-cover">
     </button>
   `).join('');
 
-  const specs = product.extendedDescription.split('. ').filter(s => s.trim()).map(s => `<li class="text-gray-700 py-2 border-b border-gray-100 last:border-0">${s.trim()}</li>`).join('');
-
-  const buttonText = inCart ? 'Already in Cart' : 'Add to Cart';
-  const buttonClass = inCart ? 'bg-green-600 hover:bg-green-700' : 'bg-orange-600 hover:bg-orange-700';
+  const specs = (product.specifications || []).map(({ label, value }) => `
+    <div class="flex flex-col space-y-1 pb-4 border-b border-gray-200 last:border-b-0">
+      <dt class="text-sm text-gray-500 uppercase tracking-wide">${label}</dt>
+      <dd class="text-base font-semibold text-gray-900">${value}</dd>
+    </div>
+  `).join('');
+  const buttonText = 'Add to Cart';
+  const buttonClass = 'bg-orange-600 hover:bg-orange-700';
 
   return `
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -22,7 +26,7 @@ export function buildProductDetailHTML(product, inCart) {
       </nav>
 
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
-        <div>
+        <div class="product-gallery-container">
           <div class="relative aspect-square bg-gray-100 rounded-lg overflow-hidden mb-4">
             <img class="product-main-img w-full h-full object-cover" src="${product.images[0]}" alt="${product.name}">
             <button type="button" class="product-gallery-prev absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/80 hover:bg-white rounded-full flex items-center justify-center shadow-lg">
@@ -39,7 +43,7 @@ export function buildProductDetailHTML(product, inCart) {
 
         <div>
           <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-3">${product.name}</h1>
-          <div class="mb-4">${renderStars(product.rating)}</div>
+          <div class="mb-4">${renderStars(product.rating, "icon-6")}</div>
           <div class="flex items-baseline gap-3 mb-6">
             <span class="text-4xl font-bold text-gray-900">${formatPrice(product.price)}</span>
             <span class="text-gray-500">/unit</span>
@@ -82,24 +86,36 @@ export function buildProductDetailHTML(product, inCart) {
             ${icon("cart-white", "icon-5")} ${buttonText}
           </button>
 
-          <div class="mt-8">
+          <button type="button" class="product-buy-now w-full py-4 border-2 border-orange-600 text-orange-600 hover:bg-orange-50 font-semibold rounded-lg transition mb-8">
+            Buy Now
+          </button>
+
+          <div>
             <h2 class="font-bold text-xl mb-3">Description</h2>
             <p class="text-gray-700 leading-relaxed">${product.description}</p>
           </div>
 
           <div class="mt-8">
-            <div class="w-full border border-gray-200 rounded-lg px-6">
+            <div class="accordion-container w-full border border-gray-200 rounded-lg px-6">
               <button type="button" class="accordion-toggle flex w-full flex-1 items-center justify-between gap-4 rounded-md text-left font-bold text-xl py-4 outline-none" aria-expanded="false">
                 Technical Specifications
                 <img src="${ICONS_PATH}chevron-down.svg" alt="" class="icon icon-4 accordion-chevron flex-shrink-0 transition-transform duration-200">
               </button>
               <div class="accordion-content hidden pb-4 text-sm">
-                <ul class="list-none pl-0">${specs}</ul>
+                <div class="bg-gray-50 rounded-lg p-6 mt-2 mb-4">
+                  <dl class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
+                    ${specs}
+                  </dl>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+
+      <section class="product-related-section mt-12 mb-8">
+        <h2 class="font-bold text-2xl">Related Products</h2>
+      </section>
     </div>
   `;
 }

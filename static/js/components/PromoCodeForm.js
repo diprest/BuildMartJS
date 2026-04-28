@@ -1,12 +1,11 @@
 import { PromoService } from '../services/StorageService.js';
-import { showToast } from '../core/helpers.js';
 
 export class PromoCodeForm {
-  constructor(inputSelector, applyBtnSelector, statusSelector, removeBtnSelector) {
+  constructor(inputSelector, applyBtnSelector, statusSelector) {
     this.input = document.querySelector(inputSelector);
     this.applyBtn = document.querySelector(applyBtnSelector);
     this.status = document.querySelector(statusSelector);
-    this.removeBtn = document.querySelector(removeBtnSelector);
+    this.hint = document.querySelector('#promo-hint');
     this.onApply = null;
     this.onRemove = null;
     this.bindEvents();
@@ -15,7 +14,6 @@ export class PromoCodeForm {
 
   bindEvents() {
     this.applyBtn?.addEventListener('click', () => this.apply());
-    this.removeBtn?.addEventListener('click', () => this.remove());
 
     this.input?.addEventListener('keydown', (e) => {
       if (e.key === 'Enter') {
@@ -23,52 +21,54 @@ export class PromoCodeForm {
         this.apply();
       }
     });
+
+    this.input?.addEventListener('input', () => this.onInputChange());
+  }
+
+  onInputChange() {
+    const val = this.input.value.trim();
+    this._updateHint(val);
+  }
+
+  _updateHint(val) {
+    if (!this.hint) return;
+    const applied = PromoService.getAppliedPromo();
+    const isValid = val.length > 0 && PromoService.apply(0, val).applied;
+    this.hint.hidden = !!applied || val.length === 0 || isValid;
   }
 
   apply() {
     const code = this.input?.value.trim() || '';
-
-    if (!code) {
-      return;
-    }
+    if (!code) return;
 
     const result = PromoService.apply(0, code);
-
-    if (!result.applied && result.message === 'Invalid promo code') {
-      showToast('Invalid promo code', 'error');
-      return;
-    }
+    if (!result.applied) return;
 
     PromoService.setAppliedPromo(code);
-    showToast('Promo code applied — 10% off!');
+
+    if (this.status) {
+      this.status.textContent = '✓ Promo code applied! You saved 10%';
+      this.status.hidden = false;
+    }
+    if (this.hint) this.hint.hidden = true;
 
     if (this.onApply) this.onApply();
-    this.syncState();
-  }
-
-  remove() {
-    PromoService.setAppliedPromo(null);
-    if (this.input) this.input.value = '';
-    showToast('Promo code removed');
-    if (this.onRemove) this.onRemove();
-    this.syncState();
   }
 
   syncState() {
     const applied = PromoService.getAppliedPromo();
+    const val = this.input?.value.trim() || '';
 
     if (applied) {
       if (this.input) this.input.value = applied;
       if (this.status) {
-        this.status.textContent = '10% discount applied';
-        this.status.className = 'text-sm text-green-600 mt-2';
+        this.status.textContent = '✓ Promo code applied! You saved 10%';
         this.status.hidden = false;
       }
-      if (this.removeBtn) this.removeBtn.hidden = false;
+      if (this.hint) this.hint.hidden = true;
     } else {
-      if (this.input) this.input.value = '';
       if (this.status) this.status.hidden = true;
-      if (this.removeBtn) this.removeBtn.hidden = true;
+      this._updateHint(val);
     }
   }
 

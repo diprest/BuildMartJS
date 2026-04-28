@@ -1,5 +1,6 @@
 import { ProductService, CartService } from '../services/StorageService.js';
 import { buildProductDetailHTML } from '../components/ProductDetails.js';
+import { renderRelatedCard } from '../components/ProductCard.js';
 import { ImageSlider } from '../components/ImageSlider.js';
 import { Accordion } from '../components/Accordion.js';
 import { getQueryParam } from '../core/helpers.js';
@@ -31,8 +32,7 @@ export class ProductPage {
 
     document.title = `${this.product.name} - BuildMart`;
 
-    const inCart = CartService.hasItem(this.product.id);
-    root.innerHTML = buildProductDetailHTML(this.product, inCart);
+    root.innerHTML = buildProductDetailHTML(this.product);
 
     const galleryContainer = root.querySelector('.product-gallery-container');
     if (galleryContainer) {
@@ -46,8 +46,23 @@ export class ProductPage {
 
     this.wireQuantity();
     this.wireAddToCart();
+    this.wireBuyNow();
+    this.renderRelated(root);
 
     updateHeaderBadge();
+  }
+
+  renderRelated(root) {
+    const ids = this.product.relatedProductIds;
+    if (!ids || ids.length === 0) return;
+    const section = root.querySelector('.product-related-section');
+    if (!section) return;
+    const related = ids.map(id => ProductService.getById(id)).filter(Boolean);
+    if (related.length === 0) return;
+    const grid = document.createElement('div');
+    grid.className = 'grid grid-cols-2 md:grid-cols-4 gap-4 mt-4';
+    grid.innerHTML = related.map(p => renderRelatedCard(p)).join('');
+    section.appendChild(grid);
   }
 
   wireQuantity() {
@@ -72,12 +87,21 @@ export class ProductPage {
     addBtn?.addEventListener('click', () => {
       const qty = Math.max(1, parseInt(qtyInput?.value, 10) || 1);
       CartService.addItem(this.product, qty);
-      showToast(`${qty}× ${this.product.name} added to cart!`);
+      showToast(`Added ${this.product.name} to cart`);
       updateHeaderBadge();
+    });
+  }
 
-      addBtn.textContent = 'Already in Cart';
-      addBtn.classList.remove('bg-orange-600', 'hover:bg-orange-700');
-      addBtn.classList.add('bg-green-600', 'hover:bg-green-700');
+  wireBuyNow() {
+    const root = document.getElementById('product-page-root');
+    const qtyInput = root.querySelector('#product-qty-input');
+    const buyBtn = root.querySelector('.product-buy-now');
+
+    buyBtn?.addEventListener('click', () => {
+      const qty = Math.max(1, parseInt(qtyInput?.value, 10) || 1);
+      CartService.addItem(this.product, qty);
+      updateHeaderBadge();
+      window.location.href = 'cart.html';
     });
   }
 }

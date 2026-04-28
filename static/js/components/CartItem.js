@@ -5,11 +5,11 @@ export function renderCartItemHTML(item) {
     <div class="p-4 md:p-6" data-cart-item="${item.id}">
       <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
         <div class="md:col-span-6 flex gap-4">
-          <div class="flex-shrink-0">
+          <a class="flex-shrink-0" href="product.html?id=${item.id}">
             <img src="${item.image}" alt="${item.name}" class="w-20 h-20 md:w-24 md:h-24 object-cover rounded-lg">
-          </div>
+          </a>
           <div class="flex-1">
-            <span class="font-semibold text-gray-900">${item.name}</span>
+            <a class="font-semibold text-gray-900 hover:text-orange-600 transition" href="product.html?id=${item.id}">${item.name}</a>
             <p class="text-sm text-gray-600 mt-1">${item.subtitle}</p>
             <button onclick="window.handleRemove(${item.id})" class="md:hidden flex items-center gap-1 text-sm text-red-600 hover:text-red-700 mt-2">
               ${icon("trash", "icon-4")} Remove

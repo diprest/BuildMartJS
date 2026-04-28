@@ -7,12 +7,20 @@ export const PRODUCTS = [
     rating: 3.5,
     images: [
       "https://images.unsplash.com/photo-1673297821205-e0575bbc2ab7?w=600",
-      "https://images.unsplash.com/photo-1562259929-b4e1fd3aef09?w=600",
-      "https://images.unsplash.com/photo-1581235720704-06d3acfcb36f?w=600"
+      "https://images.unsplash.com/photo-1673297821205-e0575bbc2ab7?w=600",
+      "https://images.unsplash.com/photo-1673297821205-e0575bbc2ab7?w=600"
     ],
     subtitle: "Professional-grade exterior paint",
-    description: "High-quality exterior paint formulated for durability and weather resistance.",
-    extendedDescription: "Professional-grade exterior paint formulated for durability and weather resistance. Ideal for siding, trim, and outdoor structures with excellent coverage and fade resistance. Coverage: up to 400 sq ft per gallon. Dry time: touch dry in 1 hour, recoat in 4 hours. Finish: satin low-sheen. VOC compliant for residential use."
+    description: "Professional-grade exterior paint set designed to withstand harsh weather conditions. This premium paint offers excellent coverage, durability, and color retention. Perfect for residential and commercial exterior surfaces.",
+    extendedDescription: "Professional-grade exterior paint set designed to withstand harsh weather conditions. Excellent coverage, durability, and color retention for residential and commercial exterior surfaces. Coverage: up to 400 sq ft per gallon. Dry time: touch dry in 1 hour, recoat in 4 hours. Finish: satin low-sheen. VOC compliant for residential use.",
+    specifications: [
+      { label: "Volume", value: "5 gallons total" },
+      { label: "Type", value: "100% Acrylic Latex" },
+      { label: "Coverage", value: "400 sq ft per gallon" },
+      { label: "Finish", value: "Satin" },
+      { label: "Dry Time", value: "2-4 hours" },
+      { label: "Colors", value: "Assorted neutral tones" }
+    ]
   },
   {
     id: 6,
@@ -20,14 +28,23 @@ export const PRODUCTS = [
     price: 52.99,
     category: "Wood & Lumber",
     rating: 4.5,
+    relatedProductIds: [2],
     images: [
       "https://images.unsplash.com/photo-1704167674713-649193461719?w=600",
-      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600",
-      "https://images.unsplash.com/photo-1541123603104-512919d6a96c?w=600"
+      "https://images.unsplash.com/photo-1704167674713-649193461719?w=600",
+      "https://images.unsplash.com/photo-1704167674713-649193461719?w=600"
     ],
     subtitle: "Construction-grade plywood",
-    description: "Versatile construction-grade plywood sheets suitable for a wide range of applications.",
-    extendedDescription: "Versatile construction-grade plywood sheets suitable for a wide range of applications. These sheets are engineered for strength and dimensional stability, perfect for subfloors, roofing, walls, and general construction. Thickness: 23/32 in (18 mm) nominal. Grade: CDX structural. Dimensions: 4 ft × 8 ft sheet. Moisture-resistant adhesive bonding."
+    description: "Versatile construction-grade plywood sheets suitable for a wide range of applications. These sheets are engineered for strength and dimensional stability, perfect for subfloors, roofing, walls, and general construction.",
+    extendedDescription: "Versatile construction-grade plywood sheets suitable for a wide range of applications. These sheets are engineered for strength and dimensional stability, perfect for subfloors, roofing, walls, and general construction. Thickness: 23/32 in (18 mm) nominal. Grade: CDX structural. Dimensions: 4 ft x 8 ft sheet. Moisture-resistant adhesive bonding.",
+    specifications: [
+      { label: "Dimensions", value: "4' x 8'" },
+      { label: "Thickness", value: "3/4 inch" },
+      { label: "Grade", value: "CDX" },
+      { label: "Plies", value: "7-ply construction" },
+      { label: "Exposure", value: "Exterior grade" },
+      { label: "Veneer", value: "Softwood" }
+    ]
   },
   {
     id: 1,
@@ -37,12 +54,20 @@ export const PRODUCTS = [
     rating: 5.0,
     images: [
       "https://images.unsplash.com/photo-1718117075248-3d3c3cd65264?w=600",
-      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600",
-      "https://images.unsplash.com/photo-1581092918056-0c4d3a4d3e6e?w=600"
+      "https://images.unsplash.com/photo-1718117075248-3d3c3cd65264?w=600",
+      "https://images.unsplash.com/photo-1718117075248-3d3c3cd65264?w=600"
     ],
     subtitle: "High-strength Portland cement mix",
-    description: "High-strength Portland cement mix for foundations, slabs, and masonry.",
-    extendedDescription: "High-strength Portland cement mix for foundations, slabs, and masonry. Consistent setting time and excellent workability for professional and DIY projects. Weight: 94 lb (42.6 kg) per bag. Compressive strength: 4000 psi at 28 days. ASTM C150 Type I/II. Store in a dry, covered area."
+    description: "High-quality Portland cement bags designed for heavy-duty construction projects. Our premium cement offers exceptional strength, durability, and workability. Ideal for foundations, structural work, and general concrete applications. Each bag contains precisely measured and tested cement that meets international quality standards.",
+    extendedDescription: "High-strength Portland cement mix for foundations, slabs, and masonry. Consistent setting time and excellent workability for professional and DIY projects. Weight: 94 lb (42.6 kg) per bag. Compressive strength: 4000 psi at 28 days. ASTM C150 Type I/II. Store in a dry, covered area.",
+    specifications: [
+      { label: "Weight", value: "50 lbs per bag" },
+      { label: "Type", value: "Portland Cement Type I/II" },
+      { label: "Compressive Strength", value: "3500 PSI at 28 days" },
+      { label: "Setting Time", value: "2-4 hours initial set" },
+      { label: "Coverage", value: "Approximately 0.45 cubic feet" },
+      { label: "Storage Life", value: "6 months in sealed bag" }
+    ]
   },
   {
     id: 2,
@@ -50,14 +75,23 @@ export const PRODUCTS = [
     price: 89.99,
     category: "Wood & Lumber",
     rating: 4.5,
+    relatedProductIds: [6],
     images: [
       "https://images.unsplash.com/photo-1764025390519-1ccc15d719a8?w=600",
-      "https://images.unsplash.com/photo-1504308805006-0f52a46c1c76?w=600",
-      "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=600"
+      "https://images.unsplash.com/photo-1764025390519-1ccc15d719a8?w=600",
+      "https://images.unsplash.com/photo-1764025390519-1ccc15d719a8?w=600"
     ],
     subtitle: "Kiln-dried lumber planks",
-    description: "Kiln-dried lumber planks selected for straight grain and minimal defects.",
-    extendedDescription: "Kiln-dried lumber planks selected for straight grain and minimal defects. Suitable for framing, decking, and high-quality interior finish work. Species: #2 prime dimensional. Dimensions: 2 in × 10 in × 12 ft. Moisture content: kiln-dried to ~15%. Planed smooth on four sides."
+    description: "Premium kiln-dried lumber planks perfect for all your woodworking and construction needs. These high-grade wooden planks are carefully selected for strength and appearance. Suitable for framing, decking, furniture making, and various carpentry projects.",
+    extendedDescription: "Premium kiln-dried lumber planks perfect for all your woodworking and construction needs. These high-grade wooden planks are carefully selected for strength and appearance. Suitable for framing, decking, furniture making, and various carpentry projects. Species: #2 prime dimensional. Dimensions: 2 in x 10 in x 12 ft. Moisture content: kiln-dried to ~15%. Planed smooth on four sides.",
+    specifications: [
+      { label: "Dimensions", value: "2\" x 6\" x 8'" },
+      { label: "Wood Type", value: "Douglas Fir" },
+      { label: "Grade", value: "Premium Select" },
+      { label: "Moisture Content", value: "15% kiln-dried" },
+      { label: "Treatment", value: "Pressure-treated option available" },
+      { label: "Quantity", value: "Sold individually" }
+    ]
   },
   {
     id: 3,
@@ -67,12 +101,20 @@ export const PRODUCTS = [
     rating: 4.0,
     images: [
       "https://images.unsplash.com/photo-1761358270922-5a4df4ab9782?w=600",
-      "https://images.unsplash.com/photo-1590077428593-a55e8e1ad1d4?w=600",
-      "https://images.unsplash.com/photo-1567427018141-0584cfc1b4b7?w=600"
+      "https://images.unsplash.com/photo-1761358270922-5a4df4ab9782?w=600",
+      "https://images.unsplash.com/photo-1761358270922-5a4df4ab9782?w=600"
     ],
     subtitle: "Classic red clay bricks",
-    description: "Classic red clay bricks for load-bearing walls, veneers, and landscape features.",
-    extendedDescription: "Classic red clay bricks for load-bearing walls, veneers, and landscape features. Fired for strength and uniform color. Standard modular size: 2-1/4 × 3-5/8 × 7-5/8 in. Compressive strength: 3000 psi minimum. Absorption: under 17%. Sold per individual brick."
+    description: "Traditional red clay bricks manufactured to the highest standards. These durable bricks are perfect for walls, patios, pathways, and architectural features. Fire-hardened for exceptional strength and weather resistance.",
+    extendedDescription: "Traditional red clay bricks manufactured to the highest standards. These durable bricks are perfect for walls, patios, pathways, and architectural features. Fire-hardened for exceptional strength and weather resistance. Standard modular size: 2-1/4 x 3-5/8 x 7-5/8 in. Compressive strength: 3000 psi minimum. Absorption: under 17%. Sold per individual brick.",
+    specifications: [
+      { label: "Dimensions", value: "8\" x 4\" x 2.25\"" },
+      { label: "Material", value: "Fire-hardened clay" },
+      { label: "Compressive Strength", value: "3000+ PSI" },
+      { label: "Water Absorption", value: "Less than 8%" },
+      { label: "Color", value: "Classic red" },
+      { label: "Weight", value: "4.5 lbs per brick" }
+    ]
   },
   {
     id: 4,
@@ -82,11 +124,19 @@ export const PRODUCTS = [
     rating: 5.0,
     images: [
       "https://images.unsplash.com/photo-1707236527163-bd3478178466?w=600",
-      "https://images.unsplash.com/photo-1568515387631-8b650bbcdb18?w=600",
-      "https://images.unsplash.com/photo-1504308805006-0f52a46c1c76?w=600"
+      "https://images.unsplash.com/photo-1707236527163-bd3478178466?w=600",
+      "https://images.unsplash.com/photo-1707236527163-bd3478178466?w=600"
     ],
     subtitle: "Structural steel I-beams",
-    description: "Structural steel I-beams for residential and light commercial framing.",
-    extendedDescription: "Structural steel I-beams for residential and light commercial framing. Mill-certified material with predictable load performance. Profile: W8×18 wide flange. Length: 20 ft stock length. Yield strength: 50 ksi ASTM A992. Primed for corrosion protection."
+    description: "Heavy-duty structural steel I-beams engineered for maximum load-bearing capacity. These professional-grade beams are essential for large construction projects, building frames, and structural support applications.",
+    extendedDescription: "Heavy-duty structural steel I-beams engineered for maximum load-bearing capacity. These professional-grade beams are essential for large construction projects, building frames, and structural support applications. Profile: W8x18 wide flange. Length: 20 ft stock length. Yield strength: 50 ksi ASTM A992. Primed for corrosion protection.",
+    specifications: [
+      { label: "Length", value: "20 feet" },
+      { label: "Profile", value: "W10x49" },
+      { label: "Material", value: "ASTM A992 Grade 50 Steel" },
+      { label: "Weight", value: "980 lbs" },
+      { label: "Yield Strength", value: "50 ksi" },
+      { label: "Finish", value: "Mill finish" }
+    ]
   }
 ];

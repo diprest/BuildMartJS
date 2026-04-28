@@ -1,4 +1,4 @@
-import { CartService, PromoService } from '../services/StorageService.js';
+import { CartService } from '../services/StorageService.js';
 import { renderCartItemHTML } from '../components/CartItem.js';
 import { CartSummary } from '../components/CartSummary.js';
 import { PromoCodeForm } from '../components/PromoCodeForm.js';
@@ -12,7 +12,7 @@ export class CartPage {
   }
 
   init() {
-    this.promoForm = new PromoCodeForm('#promo-input', '.promo-apply-btn', '#promo-status', '#promo-remove');
+    this.promoForm = new PromoCodeForm('#promo-input', '.promo-apply-btn', '#promo-status');
 
     this.promoForm.onApply = () => this.render();
     this.promoForm.onRemove = () => this.render();
@@ -44,7 +44,7 @@ export class CartPage {
 
     const subtotal = CartService.getSubtotal();
     const discount = this.promoForm?.getDiscount(subtotal) || 0;
-    this.cartSummary.render(subtotal, discount, discount > 0);
+    this.cartSummary.render(subtotal, discount);
   }
 }
 

@@ -1,5 +1,4 @@
 import { formatPrice, icon } from '../core/helpers.js';
-import { CartService } from '../services/StorageService.js';
 import { TAX_RATE } from '../core/constants.js';
 
 export class CartSummary {
@@ -7,15 +6,15 @@ export class CartSummary {
     this.container = document.querySelector(containerSelector);
   }
 
-  render(subtotal, discount, promoApplied) {
+  render(subtotal, discount) {
     if (!this.container) return;
 
     const tax = subtotal * TAX_RATE;
     const total = subtotal + tax - discount;
 
     const discountRow = discount > 0
-      ? `<div class="flex justify-between text-green-700">
-          <span>Discount</span><span>−${formatPrice(discount)}</span>
+      ? `<div class="flex justify-between text-green-600">
+          <span>Discount (10%)</span><span>−${formatPrice(discount)}</span>
         </div>`
       : '';
 

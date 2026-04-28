@@ -35,7 +35,7 @@ export class App {
       const product = ProductService.getById(productId);
       if (!product) return;
       CartService.addItem(product, 1);
-      showToast(`${product.name} added to cart!`);
+      showToast(`Added ${product.name} to cart`);
       updateHeaderBadge();
     };
 

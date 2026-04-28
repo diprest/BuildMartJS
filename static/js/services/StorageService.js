@@ -112,7 +112,7 @@ export class CartService {
         id: product.id,
         name: product.name,
         price: product.price,
-        subtitle: product.subtitle,
+        subtitle: product.category,
         image: product.images[0],
         quantity: quantity,
       });
@@ -179,7 +179,7 @@ export class PromoService {
       return { applied: false, discount: 0, total: total, message: '' };
     }
 
-    if (validation.code !== 'SAVE10') {
+    if (validation.code !== 'BUILD10') {
       return { applied: false, discount: 0, total: total, message: 'Invalid promo code' };
     }
 
