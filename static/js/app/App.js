@@ -1,5 +1,6 @@
 import { HomePage } from '../pages/HomePage.js';
 import { ProductPage } from '../pages/ProductPage.js';
+import { CartPage } from '../pages/CartPage.js';
 import { ProductService, CartService } from '../services/StorageService.js';
 import { updateHeaderBadge } from '../components/Header.js';
 import { showToast } from '../core/helpers.js';
@@ -18,6 +19,11 @@ export class App {
     if (this.page === 'product') {
       const productPage = new ProductPage();
       productPage.init();
+    }
+
+    if (this.page === 'cart') {
+      const cartPage = new CartPage();
+      cartPage.init();
     }
 
     this.wireGlobalFunctions();
@@ -81,6 +87,13 @@ export class App {
           const iconPath = "../../static/icons/sliders.svg";
           btn.innerHTML = `<img src="${iconPath}" alt="" class="icon icon-4"> ${isActive ? "Hide Filters" : "Show Filters"}`;
         }
+      }
+    };
+
+    window.renderCartPageFn = () => {
+      if (this.page === 'cart') {
+        const cartPage = new CartPage();
+        cartPage.init();
       }
     };
   }
